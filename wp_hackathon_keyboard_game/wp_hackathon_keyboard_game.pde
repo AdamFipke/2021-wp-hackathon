@@ -1,6 +1,7 @@
 //wow look at all that code
 int state = 0; 
 String result=""; 
+String[][] words = new String[3][20]; //[difficulties][words for that difficulty]
  
 void setup() { //runs once
   size(1000, 1000);
@@ -17,12 +18,12 @@ void draw() { //runs 60 times per second
   switch (state) {
   case 0:
     fill(0); 
-    text ("Please enter something and hit enter to go on \n"+result, 400, 400); 
+    text (" \n"+result, 400, 400); 
     break;
  
   case 1:
-    fill(255, 2, 2); 
-    text ("Thanks \n"+result, 133, 633); 
+    fill(0); 
+    text ("Thanks \n"+result, 400, 500); 
     break;
   }
 }
