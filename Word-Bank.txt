@@ -1,4 +1,4 @@
-//Easy words
+easy
 cat
 book
 table
@@ -19,9 +19,7 @@ river
 life
 world
 how
-
-
-//Medium words
+medium
 important
 hardware
 systems
@@ -42,8 +40,7 @@ additional
 conditions
 programming 
 administration
-
-//Hard words
+hard
 aluminium
 linoleum
 molybdenum
