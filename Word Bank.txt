@@ -1,0 +1,14 @@
+//Easy words
+
+
+
+
+
+//Medium words
+aluminium
+linoleum
+molybdenum
+
+
+
+//Hard words
