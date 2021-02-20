@@ -34,7 +34,7 @@ if (count < 50)
   String word = words[1][(int)random(20)];
   System.out.println(word);
 } else if ( count > 50 & count < 100) {
-  String word = words[2][(int)random(19)];
+  String word = words[2][(int)random(20)];
   System.out.println(word);
 } else if ( count > 100 & count < 150) {
   String word = words[2][(int)random(20)];
