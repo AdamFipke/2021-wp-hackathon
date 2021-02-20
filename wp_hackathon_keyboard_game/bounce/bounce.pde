@@ -38,14 +38,15 @@ void draw()
   }
   if(locationX < 0 || locationX > width){
    // vx*= -0.9;
-    vx*=(bounce/1.6);
-    
+   // vx*=(bounce/1.6);
+   vx*=-0.9;
+    println(vx);
   }
 
 
 
   if (locationX > width) {
-    vx = vx-2;
+  vx = vx-2;
   }
   if (locationX < 0) {
     vx = vx +2;
