@@ -6,7 +6,7 @@ void setup() {
 }
 
 public void settings() {
-   size(400, 400);
+   size(1000, 1000);
 }
 
 void draw() {
@@ -18,15 +18,7 @@ void draw() {
 }
 
 void Layout() {
-    TEXTBOX receive = new TEXTBOX();
-    receive.W = 200;
-    receive.H = 30;
-    receive.X = (width - receive.W) / 2;
-    receive.Y = 75;
-    
-    textboxes.add(receive);
-    
-    TEXTBOX message = new TEXTBOX((width - receive.W) / 2, 150, 200, 30);
+    TEXTBOX message = new TEXTBOX((width - 200) / 2, 150, 200, 30);
     textboxes.add(message);
 }
 
