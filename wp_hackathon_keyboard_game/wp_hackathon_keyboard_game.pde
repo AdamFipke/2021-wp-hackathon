@@ -4,12 +4,14 @@ String result="";
  
 void setup() { //runs once
   size(1000, 1000);
+  textFont(loadFont("CourierNewPS-BoldMT-20.vlw")); 
+  textSize(16); 
 }
  
 void draw() { //runs 60 times per second
  
  
-  background(255); 
+  background(200); 
  
  
   switch (state) {
