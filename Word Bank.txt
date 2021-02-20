@@ -1,5 +1,9 @@
 //Easy words
-
+cat
+book
+table
+water
+baby
 
 
 
