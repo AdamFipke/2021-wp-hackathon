@@ -3,6 +3,8 @@ ArrayList<TEXTBOX> textboxes = new ArrayList<TEXTBOX>();
 String userWord = ""; 
 String wordToType = "";
 String [][] words = new String [3][20];
+String [] TypedWords = new String[60];
+int numOfTypedWords = 0;
 int currentKeyIndex = 0;
 TEXTBOX message;
 int count = 0;
@@ -12,7 +14,6 @@ void setup() {
   background(180);
   //text file readers for words
   BufferedReader wordListEasy = createReader("../Word-Bank-Easy.txt");
-
   try {
     for (int a = 0; a < words[0].length; a++) {
       words[0][a] = wordListEasy.readLine();
@@ -21,9 +22,7 @@ void setup() {
   catch (IOException a) {
     println("skjdfhksdj");
   } 
-
   BufferedReader wordListMedium = createReader("../Word-Bank-Medium.txt");
-
   try {
     for (int a = 0; a < words[0].length; a++) {
       words[1][a] = wordListMedium.readLine();
@@ -32,9 +31,7 @@ void setup() {
   catch (IOException b) {
     println("skjdfhksdj");
   }
-
   BufferedReader wordListHard = createReader("../Word-Bank-Hard.txt");
-
   try {
     for (int a = 0; a < words[0].length; a++) {
       words[2][a] = wordListHard.readLine();
@@ -43,8 +40,8 @@ void setup() {
   catch (IOException c) {
     println("skjdfhksdj");
   }
-
-
+  
+  
   wordToType = printWord();
 }
 
@@ -75,8 +72,8 @@ void mousePressed() {
 
 void keyPressed() {
 
-
-
+  
+  
   if (key == wordToType.toLowerCase().charAt(currentKeyIndex)) { //if the letter is correct
     currentKeyIndex++;
     for (TEXTBOX text : textboxes) {
@@ -88,15 +85,20 @@ void keyPressed() {
     }
     //WPM goes up?
   } else if ((key == ENTER || key == RETURN) && (userWord.toLowerCase().equals(wordToType.toLowerCase()))) { //see if the key press is enter and if the word is correct
-    wordToType = printWord();
+    //stores the typed word
+    TypedWords[numOfTypedWords] = wordToType;
+    numOfTypedWords++;
+    //new word
+    wordToType = printWord(); 
     currentKeyIndex = 0;
     message.Text = "";
     message.TextLength= 0;
     userWord = "";
-    //score go up
+    
+    //score go up?
   } 
    else { //key press is wrong or word is wrong
-    message.screenShakeAmountX = 55;
+    message.screenShakeAmountX = 50;
 
     // add some text effects to show it's wrong    
     //make text red?
