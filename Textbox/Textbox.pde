@@ -42,6 +42,9 @@ boolean colourDecreasing = false, comboSizeCounter2Decreasing = false;
 
 
 void setup() {
+
+  catSound1 = new SoundFile(this, "../../data/cat_sound_final.wav");
+  backgroundSound.play();
   Layout();
   background(180);
 
@@ -109,6 +112,7 @@ public void settings() {
 }
 
 void draw() {
+
 
   background(180);
   
@@ -189,6 +193,8 @@ void draw() {
   if (numOfTypedWords >= 60) {
     c6.display();
     c6.move();
+
+    //sound
   }
 
 
