@@ -1,4 +1,6 @@
 import java.util.*; 
+import processing.sound.*;
+SoundFile file;
 ArrayList<TEXTBOX> textboxes = new ArrayList<TEXTBOX>();
 String userWord = ""; 
 String wordToType = "";
@@ -86,6 +88,10 @@ void setup() {
   c4 = new Cat(loadImage("../../catpics/purple-cat.png"));
   c5 = new Cat(loadImage("../../catpics/yellow-cat.png"));
   c6 = new Cat(loadImage("../../catpics/pop-cat.png"));
+
+  //sound stuff
+  file = new SoundFile(this, "../../data/cat_sound_final.wav");
+  file.play();
 }
 
 public void settings() {
@@ -126,65 +132,43 @@ void draw() {
 
 
   //CATS
-  if(numOfTypedWords >= 10) {
+  if (numOfTypedWords >= 10) {
     c1.display();
     c1.move();
+    
   }
   if (numOfTypedWords >= 20) {
     c2.display();
     c2.move();
-  //  if(extra == 2){
-  //  c1.speedIncrease();
-  //  extra++;
-   }
-  //}
+    
+  }
+
   if (numOfTypedWords >= 30) {
-  c3.display();
+    c3.display();
     c3.move();
-  //  if(extra == 3){
-  //  c1.speedIncrease();
-  //  c2.speedIncrease();
-  //  extra++;
-    }
-  //}
+   
+  }
+ 
   if (numOfTypedWords >= 40) {
-   c4.display();
-   c4.move();
-  //  if(extra == 4){
-  //  c1.speedIncrease();
-  //  c2.speedIncrease();
-  //  c3.speedIncrease();
-  //  extra++;
-    }
-  //}
+    c4.display();
+    c4.move();
+  
+  }
+
   if (numOfTypedWords >= 50) {
     c5.display();
     c5.move();
-  //  if(extra == 5){
-  //  c1.speedIncrease();
-  //  c2.speedIncrease();
-  //  c3.speedIncrease();
-  //  c4.speedIncrease();
-  //  extra++;
-  //  }
+   
+
   }
 
   if (numOfTypedWords >= 60) {
-   c6.display();
+    c6.display();
     c6.move();
-  //  if(extra == 6){
-  //  c1.speedIncrease();
-  //  c2.speedIncrease();
-  //  c3.speedIncrease();
-  //  c4.speedIncrease();
-  //  c5.speedIncrease();
-  //  extra++;
-   }
-
-
-
   
+    
   }
+}
 
 
 void Layout() {
@@ -222,13 +206,12 @@ void keyPressed() {
     message.Text = "";
     message.TextLength= 0;
     userWord = "";
-     c1.speedIncrease();
+    c1.speedIncrease();
     c2.speedIncrease();
     c3.speedIncrease();
     c4.speedIncrease();
     c5.speedIncrease();
     c6.speedIncrease();
- 
   } else { //key press is wrong or word is wrong
     message.screenShakeAmountX = 50;
     livesLost++;
