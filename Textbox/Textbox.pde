@@ -9,10 +9,21 @@ int currentKeyIndex = 0;
 TEXTBOX message;
 int count = 0;
 double start, end;
+PImage life1;
+PImage life2;
+PImage life3;
+PImage life4;
+PImage life5;
+
+int E2Y = 130;
+Boolean [] show = {true, true, true, true, true};
+int livesLost = -1;
+
 
 void setup() {
   Layout();
   background(180);
+
   //text file readers for words
   BufferedReader wordListEasy = createReader("../Word-Bank-Easy.txt");
   try {
@@ -51,13 +62,17 @@ public void settings() {
 }
 
 void draw() {
+
   background(180);
+
+  livesDisplay();
 
   for (TEXTBOX text : textboxes) {
     text.DRAW();
   }
 
   text(wordToType, 400, 250);
+    
 }
 
 void Layout() {
@@ -98,6 +113,14 @@ void keyPressed() {
     //score go up?
   } else { //key press is wrong or word is wrong
     message.screenShakeAmountX = 50;
+    livesLost++;
+    if (livesLost >= 5)
+    {}
+    else
+    show[livesLost] = false;
+    
+
+
 
     // add some text effects to show it's wrong    
     //make text red?
@@ -133,4 +156,26 @@ String getNewWord() {
     double time = end - start;
   }
   return "";
+}
+
+void livesDisplay() {
+  life1 = loadImage("../../catpics/purple-cat.png");
+  life1.resize(100, 100);
+  if (show[0]) image(life1, 850, 30);
+
+  life2 = loadImage("../../catpics/purple-cat.png");
+  life2.resize(100, 100);
+  if (show[1])image(life2, 750, 30);
+
+  life3 = loadImage("../../catpics/purple-cat.png");
+  life3.resize(100, 100);
+  if (show[2])image(life3, 650, 30);
+
+  life4 = loadImage("../../catpics/purple-cat.png");
+  life4.resize(100, 100);
+  if (show[3])image(life4, 550, 30);
+
+  life5 = loadImage("../../catpics/purple-cat.png");
+  life5.resize(100, 100);
+  if (show[4])image(life5, 450, 30);
 }
