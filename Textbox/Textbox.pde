@@ -43,6 +43,8 @@ int livesLost = -1;
 int cccombo = 0, comboSizeCounter = 0, tempCombo = 0, cr = 255, cg = 0, cb = 0;
 double comboSizeCounter2 = 0;
 boolean colourDecreasing = false, comboSizeCounter2Decreasing = false;
+ String s = "";
+ int run = 0;
 
 
 void setup() {
@@ -194,11 +196,17 @@ void draw() {
     }
   }
   else if(win == 1) {
-    textSize(50);
+    if(run == 0){
+    s = "";
+    s = getNewWord();
+    run = 1;
+    }
+  
+   textSize(50);
     fill(0);
     text("Congratulations, you win!!", 400, 300);
     textSize(30);
-    text(getNewWord(), 400, 500);
+     text(s, 400, 500);
   }
   else {
      textSize(30);
@@ -279,7 +287,7 @@ void keyPressed() {
 String getNewWord() {
   textSize(30);
   fill(0);
-  if (count < 250)
+  if (count < 100)
   {
     String word = words[0][(int)random(words[0].length)];
     Boolean newWord = false;
@@ -293,7 +301,7 @@ String getNewWord() {
       }
     }
     return word;
-  } else if ( count > 250 & count < 350) {
+  } else if ( count > 100 & count < 200) {
     String word = words[1][(int)random(words[1].length)];
     Boolean newWord = false;
     while (!newWord) {
@@ -306,7 +314,7 @@ String getNewWord() {
       }
     }
     return word;
-  } else if ( count > 350 & count < 450) {
+  } else if ( count > 200 & count < 300) {
     String word = words[2][(int)random(words[2].length)];
     Boolean newWord = false;
     while (!newWord) {
@@ -319,9 +327,10 @@ String getNewWord() {
       }
     }
     return word;
-  } else if (count > 450) {
+  } else if (count >= 300) {
     System.out.println("You win!!!");
     end = second() + (60 * (minute() + 60 * (hour() + 24 * (day()))));
+
     double time = end - start;
     wpm = (int) ((((double) count / 5) / time) * 60);
     win = 1;
