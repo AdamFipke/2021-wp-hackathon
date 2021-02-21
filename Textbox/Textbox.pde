@@ -27,6 +27,7 @@ Cat c3;
 Cat c4;
 Cat c5;
 Cat c6;
+int extra = 2;
 
 int E2Y = 130;
 Boolean [] show = {true, true, true, true, true};
@@ -105,15 +106,14 @@ void draw() {
 
   //CCCC COMBO
   if (cccombo >= 20) {
-    
   } else if (cccombo >= 10) {
     message.TEXTSIZE = 24 + cccombo;
     tempCombo = cccombo;
   } else {
     message.TEXTSIZE = 24 + tempCombo;
     if ((tempCombo > 0) && (comboSizeCounter > 2)) {
-     tempCombo--; 
-     comboSizeCounter = 0;
+      tempCombo--; 
+      comboSizeCounter = 0;
     }
   }
   comboSizeCounter++;
@@ -130,34 +130,62 @@ void draw() {
   if (numOfTypedWords >= 10) {
     c1.display();
     c1.move();
-   
   }
   if (numOfTypedWords >= 20) {
     c2.display();
     c2.move();
+    if(extra == 2){
+    c1.speedIncrease();
+    extra++;
+    }
   }
   if (numOfTypedWords >= 30) {
     c3.display();
     c3.move();
+    if(extra == 3){
+    c1.speedIncrease();
+    c2.speedIncrease();
+    extra++;
+    }
   }
   if (numOfTypedWords >= 40) {
     c4.display();
     c4.move();
+    if(extra == 4){
+    c1.speedIncrease();
+    c2.speedIncrease();
+    c3.speedIncrease();
+    extra++;
+    }
   }
   if (numOfTypedWords >= 50) {
     c5.display();
     c5.move();
+    if(extra == 5){
+    c1.speedIncrease();
+    c2.speedIncrease();
+    c3.speedIncrease();
+    c4.speedIncrease();
+    extra++;
+    }
   }
 
   if (numOfTypedWords >= 60) {
     c6.display();
     c6.move();
-    
-    
-    
-    if(livesLost == 5){
-      background(255,0,0);
-      
+    if(extra == 6){
+    c1.speedIncrease();
+    c2.speedIncrease();
+    c3.speedIncrease();
+    c4.speedIncrease();
+    c5.speedIncrease();
+    extra++;
+    }
+
+
+
+    if (livesLost == 5) {
+      background(255, 0, 0);
     }
   }
 }
@@ -285,5 +313,4 @@ void livesDisplay() {
   life5 = loadImage("../../catpics/purple-cat.png");
   life5.resize(100, 100);
   if (show[4])image(life5, 450, 30);
-  
 }

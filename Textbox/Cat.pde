@@ -28,8 +28,8 @@ public class Cat {
     }
   }
    void speedIncrease(){
-     this.velocity.x = this.velocity.x * 1.2;
-     this.velocity.y = this.velocity.y * 1.2;
+     this.velocity.x = this.velocity.x * 1.01;
+     this.velocity.y = this.velocity.y * 1.01;
    }
   
 }
