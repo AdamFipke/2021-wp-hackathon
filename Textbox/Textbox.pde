@@ -1,6 +1,6 @@
-import java.util.*; 
+import java.util.*;  //<>//
 import processing.sound.*;
-SoundFile file;
+SoundFile catSound1;
 ArrayList<TEXTBOX> textboxes = new ArrayList<TEXTBOX>();
 String userWord = ""; 
 String wordToType = "";
@@ -91,8 +91,7 @@ void setup() {
   c6 = new Cat(loadImage("../../catpics/pop-cat.png"));
 
   //sound stuff
-  file = new SoundFile(this, "../../data/cat_sound_final.wav");
-  file.play();
+  catSound1 = new SoundFile(this, "../../data/cat_sound_final.wav");
 }
 
 public void settings() {
@@ -228,6 +227,7 @@ void keyPressed() {
     message.screenShakeAmountX = 50;
     livesLost++;
     cccombo = 0;
+    catSound1.play();
     if (livesLost >= 5)
     {
     } else

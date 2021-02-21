@@ -3,6 +3,7 @@ public class Cat {
   PVector velocity;  
   PVector gravity;
   PImage cat;
+  boolean alive;
   Cat(PImage cat) {
     this.cat = cat;
     this.cat.resize(100, 50);
@@ -12,7 +13,7 @@ public class Cat {
   }
   void display() {
     image(cat, this.location.x, this.location.y);
-
+    alive = true;
   }
   void move() {
     location.add(velocity);
@@ -24,14 +25,18 @@ public class Cat {
     }
     if (this.location.y >= height - 50) {
       this.velocity.y = this.velocity.y * -0.9; 
-     
-     this.location.y = height - 50;
+      catSound1.play();
+      this.location.y = height - 50;
     }
   }
-   void speedIncrease(){
-   this.velocity.x = this.velocity.x * 1.01;
-     this.velocity.y = this.velocity.y * 1.02;
-   }
-   
-  
+  void speedIncrease() {
+    if (alive) {
+      this.velocity.x = this.velocity.x * 1.01;
+      if (this.velocity.y < 0) {
+        this.velocity.y = this.velocity.y -1;
+      } else {
+        this.velocity.y = this.velocity.y +1;
+      }
+    }
+  }
 }
