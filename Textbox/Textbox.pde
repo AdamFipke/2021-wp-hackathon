@@ -270,7 +270,7 @@ void keyPressed() {
     livesLost++;
     cccombo = 0;
     catSound1.play();
-    if (livesLost >= 5)
+    if (livesLost > 3)
     {
       win = 2;
     } else
