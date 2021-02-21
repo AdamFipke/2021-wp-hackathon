@@ -21,21 +21,21 @@ PVector gravity;
 PImage[] cats = new PImage[6];
 PImage cat1;
 PImage cat2;
+int p = 1;
+int i = 0;
+float score = 0;
 Cat c1;
 Cat c2;
 Cat c3;
 Cat c4;
 Cat c5;
 Cat c6;
+boolean correct;
 
 int E2Y = 130;
 Boolean [] show = {true, true, true, true, true};
 int livesLost = -1;
-//combo stuff
 int cccombo = 0;
-int colourCounter = 0;
-int comboSizeCounter = 0;
-int tempCombo = 0;
 
 void setup() {
   Layout();
@@ -86,6 +86,7 @@ void setup() {
   c4 = new Cat(loadImage("../../catpics/purple-cat.png"));
   c5 = new Cat(loadImage("../../catpics/yellow-cat.png"));
   c6 = new Cat(loadImage("../../catpics/pop-cat.png"));
+  
 }
 
 public void settings() {
@@ -104,20 +105,17 @@ void draw() {
 
 
   //CCCC COMBO
-  if (cccombo >= 20) {
-    
-  } else if (cccombo >= 10) {
+  int tempCombo = 0;
+  if (cccombo >= 10) {
     message.TEXTSIZE = 24 + cccombo;
     tempCombo = cccombo;
   } else {
     message.TEXTSIZE = 24 + tempCombo;
-    if ((tempCombo > 0) && (comboSizeCounter > 2)) {
-     tempCombo--; 
-     comboSizeCounter = 0;
+    if (tempCombo > 0) {
+      tempCombo--;
     }
   }
-  comboSizeCounter++;
-  fill(count*cccombo/5, count*cccombo/10, count*cccombo/15);
+  fill(count*cccombo/3, count*cccombo/6, count*cccombo/9);
   text(wordToType, 400, 250);
   text("Combo: "+cccombo, 100-message.screenShakeAmountX, 100+message.screenShakeAmountY);
   fill(255);
@@ -130,7 +128,7 @@ void draw() {
   if (numOfTypedWords >= 10) {
     c1.display();
     c1.move();
-   
+    score = score + 0.1;
   }
   if (numOfTypedWords >= 20) {
     c2.display();
@@ -152,13 +150,6 @@ void draw() {
   if (numOfTypedWords >= 60) {
     c6.display();
     c6.move();
-    
-    
-    
-    if(livesLost == 5){
-      background(255,0,0);
-      
-    }
   }
 }
 
@@ -217,7 +208,7 @@ void keyPressed() {
 String getNewWord() {
   textSize(30);
   fill(0);
-  if (count < 250)
+  if (count < 200)
   {
     String word = words[0][(int)random(words[0].length)];
     Boolean newWord = false;
@@ -231,7 +222,7 @@ String getNewWord() {
       }
     }
     return word;
-  } else if ( count > 250 & count < 350) {
+  } else if ( count > 200 & count < 300) {
     String word = words[1][(int)random(words[1].length)];
     Boolean newWord = false;
     while (!newWord) {
@@ -244,7 +235,7 @@ String getNewWord() {
       }
     }
     return word;
-  } else if ( count > 350 & count < 450) {
+  } else if ( count > 300 & count < 400) {
     String word = words[2][(int)random(words[2].length)];
     Boolean newWord = false;
     while (!newWord) {
@@ -285,5 +276,4 @@ void livesDisplay() {
   life5 = loadImage("../../catpics/purple-cat.png");
   life5.resize(100, 100);
   if (show[4])image(life5, 450, 30);
-  
 }
