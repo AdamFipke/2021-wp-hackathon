@@ -33,10 +33,9 @@ int E2Y = 130;
 Boolean [] show = {true, true, true, true, true};
 int livesLost = -1;
 //combo stuff
-int cccombo = 0;
-int colourCounter = 0;
-int comboSizeCounter = 0;
-int tempCombo = 0;
+int cccombo = 0, colourCounter = 0, comboSizeCounter = 0, tempCombo = 0, cr = 255, cg = 0, cb = 0;
+boolean colourDecreasing = false;
+
 
 void setup() {
   Layout();
@@ -105,7 +104,9 @@ void draw() {
 
 
   //CCCC COMBO
+  fill(count*cccombo/5, count*cccombo/10, count*cccombo/15);
   if (cccombo >= 20) {
+    fill(getRainbow());
   } else if (cccombo >= 10) {
     message.TEXTSIZE = 24 + cccombo;
     tempCombo = cccombo;
@@ -117,11 +118,9 @@ void draw() {
     }
   }
   comboSizeCounter++;
-  fill(count*cccombo/5, count*cccombo/10, count*cccombo/15);
   text(wordToType, 400, 250);
   text("Combo: "+cccombo, 100-message.screenShakeAmountX, 100+message.screenShakeAmountY);
   fill(255);
-  //message.TEXTSIZE = 24;
 
 
 
@@ -214,7 +213,7 @@ void keyPressed() {
       currentKeyIndex--;
     }
     //WPM goes up?
-  } else if ((key == ENTER || key == RETURN) && (userWord.toLowerCase().equals(wordToType.toLowerCase()))) { //see if the key press is enter and if the word is correct
+  } else if ((key == ENTER || key == RETURN) && (userWord.toLowerCase().equals(wordToType.toLowerCase())) || (key == DELETE)) { //see if the key press is enter and if the word is correct
     //stores the typed word
     TypedWords[numOfTypedWords] = wordToType;
     numOfTypedWords++;
@@ -313,4 +312,53 @@ void livesDisplay() {
   life5 = loadImage("../../catpics/purple-cat.png");
   life5.resize(100, 100);
   if (show[4])image(life5, 450, 30);
+}
+
+color getRainbow() {
+  //Red to yellow
+  if (cg < 255 && cb == 0)
+  {
+    cg = cg + 1;
+  }
+  //Yellow to green
+  if (cg == 255 && cb == 0) 
+  {
+    if (cr >= 0)
+    {
+      cr = cr - 1;
+    }
+  }
+  //Green to cyan
+  if (cr == 0 && cg == 255) 
+  {
+    if (cb < 255)
+    {
+      cb = cb + 1;
+    }
+  }
+  //cyan to blue
+  if (cb == 255 && cr == 0)
+  {
+    if (cg > 0)
+    {
+      cg = cg - 1;
+    }
+  }
+  //Purple to magenta
+  if (cb == 255 && cg == 0) 
+  {
+    if (cr < 255)
+    {
+      cr = cr + 1;
+    }
+  }
+  //magenta to red
+  if (cr == 255 && cg == 0)
+  {
+    if (cb > 0)
+    {
+      cb = cb - 1;
+    }
+  }
+  return color(cr, cg, cb);
 }
