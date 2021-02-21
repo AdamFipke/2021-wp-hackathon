@@ -31,8 +31,7 @@ void setup() {
 }
 
  
-public Class Cat(){
-}
+
 
 void draw() { //<>//
   background(255);

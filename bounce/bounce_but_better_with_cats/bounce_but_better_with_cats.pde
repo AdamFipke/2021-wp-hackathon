@@ -6,7 +6,7 @@ PImage cat1;
 PImage cat2;
 int p = 1;
 int i = 0;
-int score = 0;
+float score = 0;
 Cat c1;
 Cat c2;
 Cat c3;
@@ -15,7 +15,7 @@ Cat c5;
 Cat c6;
 
 void setup() {
-  size(360,640);
+  size(1000,1000);
   location = new PVector(100, 100);
   velocity = new PVector(3, 7);
   gravity = new PVector(0, 0.4);
@@ -25,13 +25,14 @@ void setup() {
   c4 = new Cat(loadImage("../../catpics/purple-cat.png"));
   c5 = new Cat(loadImage("../../catpics/yellow-cat.png"));
   c6 = new Cat(loadImage("../../catpics/pop-cat.png"));
+  score = 3;
 }
 
 
 
 
 void draw() {
-  background(255);
+  background(170);
 
 
 
@@ -39,6 +40,7 @@ void draw() {
    if (score >= 3) {
      c1.display();
      c1.move();
+     score = score + 0.1;
   }
   if(score >= 6){
     c2.display();
@@ -57,31 +59,31 @@ void draw() {
     c5.move();
   }
   
-  //if(game DONE)
-  //c6.display();
-  //c6.move();
-  
+  if(score >= 47){
+  c6.display();
+  c6.move();
+  }
 
 
-
-  location.add(velocity);
-  velocity.add(gravity);
+//Ball
+  //location.add(velocity);
+  //velocity.add(gravity);
 
 //   Bounce off edges
- if ((location.x > width) || (location.x < 0)) {
-   velocity.x = velocity.x * -1;
-  }
-  if (location.y > height) {
-    velocity.y = velocity.y * -0.95; 
-    location.y = height;
-    score++;
-  }
+// if ((location.x > width) || (location.x < 0)) {
+  // velocity.x = velocity.x * -1;
+  //}
+  //if (location.y > height) {
+    //velocity.y = velocity.y * -0.95; 
+    //location.y = height;
+   // score++;
+  //}
 
 
-  stroke(255);
-  strokeWeight(2);
-  fill(127);
-  ellipse(location.x, location.y, 48, 48);
-  println(score);
-  score++;
+//  stroke(255);
+  //strokeWeight(2);
+  //fill(127);
+  //llipse(location.x, location.y, 48, 48);
+  //println(score);
+  //score++;
 }

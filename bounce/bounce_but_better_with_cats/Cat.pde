@@ -20,7 +20,7 @@ public class Cat {
   velocity.add(gravity);
 
   // Bounce off edges
-  if ((this.location.x > width) || (this.location.x < 0)) {
+  if ((this.location.x > width -100) || (this.location.x < 0)) {
     this.velocity.x = this.velocity.x * -1;
   }
   if (this.location.y > height) {
