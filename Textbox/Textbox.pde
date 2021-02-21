@@ -1,4 +1,4 @@
-import java.util.*; 
+import java.util.*;  //<>//
 ArrayList<TEXTBOX> textboxes = new ArrayList<TEXTBOX>();
 String userWord = ""; 
 String wordToType = "";
@@ -32,8 +32,9 @@ int E2Y = 130;
 Boolean [] show = {true, true, true, true, true};
 int livesLost = -1;
 //combo stuff
-int cccombo = 0, colourCounter = 0, comboSizeCounter = 0, tempCombo = 0, cr = 255, cg = 0, cb = 0;
-boolean colourDecreasing = false;
+int cccombo = 0, comboSizeCounter = 0, tempCombo = 0, cr = 255, cg = 0, cb = 0;
+double comboSizeCounter2 = 0;
+boolean colourDecreasing = false, comboSizeCounter2Decreasing = false;
 
 
 void setup() {
@@ -105,6 +106,17 @@ void draw() {
   //CCCC COMBO
   fill(count*cccombo/5, count*cccombo/10, count*cccombo/15);
   if (cccombo >= 20) {
+    if (comboSizeCounter2 > 3) {
+      comboSizeCounter2Decreasing = true;
+    } else if (comboSizeCounter2 < -2) {
+      comboSizeCounter2Decreasing = false;
+    }
+    if (comboSizeCounter2Decreasing) {
+      comboSizeCounter2-=0.2;
+    } else {
+      comboSizeCounter2+=0.2;
+    }
+    message.TEXTSIZE = (24 + cccombo + (int)comboSizeCounter2);
     fill(getRainbow());
   } else if (cccombo >= 10) {
     message.TEXTSIZE = 24 + cccombo;
@@ -117,11 +129,11 @@ void draw() {
     }
   }
   comboSizeCounter++;
-  text(wordToType, 400, 250);
-  text("Combo: "+cccombo, 100-message.screenShakeAmountX, 100+message.screenShakeAmountY);
+  text("Combo: "+cccombo, 50-message.screenShakeAmountX, 100+message.screenShakeAmountY);
+  text(wordToType, 400, 250 + ((cccombo > 20) ? (cccombo-20)*2 : 0));
   fill(255);
 
-
+  
 
 
   //CATS
