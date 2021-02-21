@@ -1,5 +1,6 @@
 import java.util.*;  //<>//
 import processing.sound.*;
+import processing.video.*;
 SoundFile catSound1;
 ArrayList<TEXTBOX> textboxes = new ArrayList<TEXTBOX>();
 String userWord = ""; 
@@ -30,7 +31,7 @@ Cat c4;
 Cat c5;
 Cat c6;
 int extra = 2;
-
+Movie movie;
 int E2Y = 130;
 Boolean [] show = {true, true, true, true, true};
 int livesLost = -1;
@@ -92,17 +93,35 @@ void setup() {
 
   //sound stuff
   catSound1 = new SoundFile(this, "../../data/cat_sound_final.wav");
+  catSound1.amp(0.5); 
+  //movie stuff
+  movie = new Movie(this, "../../data/keyboard-cat.mov");
+  //  movie.width = width;
+  //  movie.height = height;
+
+  movie.loop();
+  movie.volume(0.4); //music volume
+ 
 }
 
 public void settings() {
-  size(1000, 1000);
+  size(1000, 1000, P2D);
 }
 
 void draw() {
 
   background(180);
-
+  
+  //movie transparency
+  int trnps = count/10;
+  if (trnps >180) {
+    trnps = 180;
+  }
+  tint(255, trnps);
+    image(movie, 0, 0, width, height);
+  tint(255, 255);
   livesDisplay();
+
 
   for (TEXTBOX text : textboxes) {
     text.DRAW();
@@ -139,46 +158,40 @@ void draw() {
   text(wordToType, 400, 250 + ((cccombo > 20) ? (cccombo-20)*2 : 0));
   fill(255);
 
-  
+
 
 
   //CATS
   if (numOfTypedWords >= 10) {
     c1.display();
     c1.move();
-    
   }
   if (numOfTypedWords >= 20) {
     c2.display();
     c2.move();
-    
   }
 
   if (numOfTypedWords >= 30) {
     c3.display();
     c3.move();
-   
   }
- 
+
   if (numOfTypedWords >= 40) {
     c4.display();
     c4.move();
-  
   }
 
   if (numOfTypedWords >= 50) {
     c5.display();
     c5.move();
-   
-
   }
 
   if (numOfTypedWords >= 60) {
     c6.display();
     c6.move();
-  
-    
   }
+
+
 }
 
 
@@ -361,4 +374,8 @@ color getRainbow() {
     }
   }
   return color(cr, cg, cb);
+}
+
+void movieEvent(Movie movie) {  
+  movie.read();
 }
