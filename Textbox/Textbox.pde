@@ -75,6 +75,7 @@ void keyPressed() {
 
   if (key == wordToType.toLowerCase().charAt(currentKeyIndex)) { //if the letter is correct
     currentKeyIndex++;
+    count++;
     for (TEXTBOX text : textboxes) {
       text.KEYPRESSED(key, keyCode);
     }
