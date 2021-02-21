@@ -25,7 +25,7 @@ void setup() {
   c4 = new Cat(loadImage("../../catpics/purple-cat.png"));
   c5 = new Cat(loadImage("../../catpics/yellow-cat.png"));
   c6 = new Cat(loadImage("../../catpics/pop-cat.png"));
-  score = 10;
+  score = 5;
 }
 
 
@@ -37,29 +37,29 @@ void draw() {
 
 
 
-  if (score >= 10) {
+  if (score >= 5) {
     c1.display();
     c1.move();
     score = score + 0.1;
   }
-  if (score >= 20) {
+  if (score >= 10) {
     c2.display();
     c2.move();
   }
-  if (score >= 30) {
+  if (score >= 15) {
     c3.display();
     c3.move();
   }
-  if (score >= 40) {
+  if (score >= 20) {
     c4.display();
     c4.move();
   }
-  if (score >= 50) {
+  if (score >= 26) {
     c5.display();
     c5.move();
   }
 
-  if (score >= 60) {
+  if (score >= 30) {
     c6.display();
     c6.move();
   }
