@@ -204,17 +204,17 @@ void draw() {
   
    textSize(50);
     fill(0);
-    text("Congratulations, you win!!", 400, 300);
+    text("Congratulations, you win!!", 200, 300);
     textSize(30);
-     text(s, 400, 500);
+     text(s, 200, 500);
   }
   else {
      textSize(30);
      fill(0);
-     text("You have run out of lives", 400, 250);
+     text("You have run out of lives", 200, 250);
      textSize(50);
      fill(240, 0, 0);
-     text("GAME OVER", 400, 400);
+     text("GAME OVER", 200, 400);
   }
 }
 
@@ -287,7 +287,7 @@ void keyPressed() {
 String getNewWord() {
   textSize(30);
   fill(0);
-  if (count < 100)
+  if (count < 150)
   {
     String word = words[0][(int)random(words[0].length)];
     Boolean newWord = false;
@@ -301,7 +301,7 @@ String getNewWord() {
       }
     }
     return word;
-  } else if ( count > 100 & count < 200) {
+  } else if ( count >= 150 & count < 250) {
     String word = words[1][(int)random(words[1].length)];
     Boolean newWord = false;
     while (!newWord) {
@@ -314,7 +314,7 @@ String getNewWord() {
       }
     }
     return word;
-  } else if ( count > 200 & count < 300) {
+  } else if ( count >= 250 & count < 300) {
     String word = words[2][(int)random(words[2].length)];
     Boolean newWord = false;
     while (!newWord) {
@@ -328,7 +328,6 @@ String getNewWord() {
     }
     return word;
   } else if (count >= 300) {
-    System.out.println("You win!!!");
     end = second() + (60 * (minute() + 60 * (hour() + 24 * (day()))));
 
     double time = end - start;
