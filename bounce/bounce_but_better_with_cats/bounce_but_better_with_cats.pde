@@ -25,7 +25,7 @@ void setup() {
   c4 = new Cat(loadImage("../../catpics/purple-cat.png"));
   c5 = new Cat(loadImage("../../catpics/yellow-cat.png"));
   c6 = new Cat(loadImage("../../catpics/pop-cat.png"));
-  score = 5;
+  
 }
 
 
@@ -65,25 +65,5 @@ void draw() {
   }
 
 
-  //Ball
-  //location.add(velocity);
-  //velocity.add(gravity);
 
-  //   Bounce off edges
-  // if ((location.x > width) || (location.x < 0)) {
-  // velocity.x = velocity.x * -1;
-  //}
-  //if (location.y > height) {
-  //velocity.y = velocity.y * -0.95; 
-  //location.y = height;
-  // score++;
-  //}
-
-
-  //  stroke(255);
-  //strokeWeight(2);
-  //fill(127);
-  //llipse(location.x, location.y, 48, 48);
-  //println(score);
-  //score++;
 }

@@ -29,7 +29,6 @@ Cat c3;
 Cat c4;
 Cat c5;
 Cat c6;
-int extra = 2;
 
 int E2Y = 130;
 Boolean [] show = {true, true, true, true, true};
@@ -41,6 +40,9 @@ boolean colourDecreasing = false, comboSizeCounter2Decreasing = false;
 
 
 void setup() {
+
+  catSound1 = new SoundFile(this, "../../data/cat_sound_final.wav");
+  backgroundSound.play();
   Layout();
   background(180);
 
@@ -91,7 +93,8 @@ void setup() {
   c6 = new Cat(loadImage("../../catpics/pop-cat.png"));
 
   //sound stuff
-  catSound1 = new SoundFile(this, "../../data/cat_sound_final.wav");
+
+  
 }
 
 public void settings() {
@@ -99,6 +102,7 @@ public void settings() {
 }
 
 void draw() {
+
 
   background(180);
 
@@ -139,45 +143,39 @@ void draw() {
   text(wordToType, 400, 250 + ((cccombo > 20) ? (cccombo-20)*2 : 0));
   fill(255);
 
-  
+
 
 
   //CATS
   if (numOfTypedWords >= 10) {
     c1.display();
     c1.move();
-    
   }
   if (numOfTypedWords >= 20) {
     c2.display();
     c2.move();
-    
   }
 
   if (numOfTypedWords >= 30) {
     c3.display();
     c3.move();
-   
   }
- 
+
   if (numOfTypedWords >= 40) {
     c4.display();
     c4.move();
-  
   }
 
   if (numOfTypedWords >= 50) {
     c5.display();
     c5.move();
-   
-
   }
 
   if (numOfTypedWords >= 60) {
     c6.display();
     c6.move();
-  
-    
+
+    //sound
   }
 }
 
