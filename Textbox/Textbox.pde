@@ -1,4 +1,4 @@
-import java.util.*; //<>// //<>// //<>// //<>// //<>//
+import java.util.*; 
 ArrayList<TEXTBOX> textboxes = new ArrayList<TEXTBOX>();
 String userWord = ""; 
 String wordToType = "";
@@ -6,6 +6,7 @@ String [][] words = new String [3][20];
 int currentKeyIndex = 0;
 TEXTBOX message;
 int count = 0;
+double start, end;
 
 void setup() {
   Layout();
@@ -44,8 +45,8 @@ void setup() {
     println("skjdfhksdj");
   }
 
-
   wordToType = printWord();
+  start = second() + (60 * (minute() + 60 * (hour() + 24 * (day()))));
 }
 
 public void settings() {
@@ -74,8 +75,6 @@ void mousePressed() {
 }
 
 void keyPressed() {
-
-
 
   if (key == wordToType.toLowerCase().charAt(currentKeyIndex)) { //if the letter is correct
     currentKeyIndex++;
@@ -118,6 +117,8 @@ String printWord() {
     return word;
   } else if (count > 150) {
     System.out.println("You win!!!");
+    end = second() + (60 * (minute() + 60 * (hour() + 24 * (day()))));
+    double time = end - start;
   }
   return "";
 }
