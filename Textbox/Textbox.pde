@@ -1,4 +1,4 @@
-import java.util.*;
+import java.util.*; //<>// //<>// //<>// //<>// //<>//
 ArrayList<TEXTBOX> textboxes = new ArrayList<TEXTBOX>();
 String userWord = ""; 
 String wordToType = "";
@@ -75,33 +75,32 @@ void mousePressed() {
 
 void keyPressed() {
 
-  for (TEXTBOX text : textboxes) {
-    text.KEYPRESSED(key, keyCode);
-  }
+
+
   if (key == wordToType.toLowerCase().charAt(currentKeyIndex)) { //if the letter is correct
     currentKeyIndex++;
-    if (currentKeyIndex == wordToType.length()) {
-     currentKeyIndex--; 
+    for (TEXTBOX text : textboxes) {
+      text.KEYPRESSED(key, keyCode);
     }
-    //WPM goes up? //<>//
-  } else if ((key == ENTER || key == RETURN) && (userWord.toLowerCase().equals(wordToType.toLowerCase()))) { //see if the key press is enter and if the word is correct //<>//
-    wordToType = printWord(); //<>//
-    currentKeyIndex = 0; //<>//
-    message.Text = ""; //<>//
+    userWord = userWord + key;
+    if (currentKeyIndex == wordToType.length()) {
+      currentKeyIndex--;
+    }
+    //WPM goes up?
+  } else if ((key == ENTER || key == RETURN) && (userWord.toLowerCase().equals(wordToType.toLowerCase()))) { //see if the key press is enter and if the word is correct
+    wordToType = printWord();
+    currentKeyIndex = 0;
+    message.Text = "";
+    message.TextLength= 0;
     userWord = "";
     //score go up
-  } else if (key == BACKSPACE || key == DELETE) {
-    currentKeyIndex--;
-    if (currentKeyIndex < 0) {
-      currentKeyIndex = 0;
-    }
-  } else { //key press is wrong or word is wrong
+  } 
+   else { //key press is wrong or word is wrong
     message.screenShakeAmountX = 55;
 
     // add some text effects to show it's wrong    
     //make text red?
   }
-  userWord = userWord + key;
 }
 
 String printWord() {
