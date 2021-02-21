@@ -2,7 +2,7 @@ import java.util.*;
 ArrayList<TEXTBOX> textboxes = new ArrayList<TEXTBOX>();
 String userWord = ""; 
 String wordToType = "";
-String [][] words = new String [3][998];
+String [][] words = new String [3][];
 String [] TypedWords = new String[60];
 int numOfTypedWords = 0;
 int currentKeyIndex = 0;
@@ -15,8 +15,8 @@ PImage life3;
 PImage life4;
 PImage life5;
 
-int E2Y = 130; //<>//
-Boolean [] show = {true, true, true, true, true}; //<>//
+int E2Y = 130;
+Boolean [] show = {true, true, true, true, true};
 int livesLost = -1;
 
 
@@ -25,6 +25,7 @@ void setup() {
   background(180);
 
   //text file readers for words
+  words[0] = new String[998];
   BufferedReader wordListEasy = createReader("../Word-Bank-Easy.txt");
   try {
     for (int a = 0; a < words[0].length; a++) {
@@ -34,6 +35,7 @@ void setup() {
   catch (IOException a) {
     println("skjdfhksdj");
   } 
+  words[1] = new String[1470];
   BufferedReader wordListMedium = createReader("../Word-Bank-Medium.txt");
   try {
     for (int a = 0; a < words[1].length; a++) {
@@ -43,6 +45,7 @@ void setup() {
   catch (IOException b) {
     println("skjdfhksdj");
   }
+  words[2] = new String[335];
   BufferedReader wordListHard = createReader("../Word-Bank-Hard.txt");
   try {
     for (int a = 0; a < words[2].length; a++) {
@@ -72,7 +75,6 @@ void draw() {
   }
 
   text(wordToType, 400, 250);
-    
 }
 
 void Layout() {
@@ -115,10 +117,10 @@ void keyPressed() {
     message.screenShakeAmountX = 50;
     livesLost++;
     if (livesLost >= 5)
-    {}
-    else
-    show[livesLost] = false;
-    
+    {
+    } else
+      show[livesLost] = false;
+
 
 
 
@@ -130,12 +132,12 @@ void keyPressed() {
 String getNewWord() {
   textSize(30);
   fill(0);
-  if (count < 50)
+  if (count < 100)
   {
-    String word = words[0][(int)random(20)];
+    String word = words[0][(int)random(words[0].length)];
     Boolean newWord = false;
     while (!newWord) {
-      word = words[0][(int)random(20)];
+      word = words[0][(int)random(words[0].length)];
       newWord = true;
       for (int i = 0; i < numOfTypedWords; i++) { //makes sure to not give the person a word that's already been typed
         if  (word.toLowerCase().equals(TypedWords[i].toLowerCase())) {
@@ -144,11 +146,31 @@ String getNewWord() {
       }
     }
     return word;
-  } else if ( count > 50 & count < 100) {
-    String word = words[1][(int)random(20)];
+  } else if ( count > 100 & count < 200) {
+    String word = words[1][(int)random(words[1].length)];
+    Boolean newWord = false;
+    while (!newWord) {
+      word = words[1][(int)random(words[1].length)];
+      newWord = true;
+      for (int i = 0; i < numOfTypedWords; i++) { //makes sure to not give the person a word that's already been typed
+        if  (word.toLowerCase().equals(TypedWords[i].toLowerCase())) {
+          newWord = false;
+        }
+      }
+    }
     return word;
-  } else if ( count > 100 & count < 150) {
-    String word = words[2][(int)random(20)];
+  } else if ( count > 200 & count < 300) {
+    String word = words[2][(int)random(words[2].length)];
+    Boolean newWord = false;
+    while (!newWord) {
+      word = words[2][(int)random(words[2].length)];
+      newWord = true;
+      for (int i = 0; i < numOfTypedWords; i++) { //makes sure to not give the person a word that's already been typed
+        if  (word.toLowerCase().equals(TypedWords[i].toLowerCase())) {
+          newWord = false;
+        }
+      }
+    }
     return word;
   } else if (count > 150) {
     System.out.println("You win!!!");
