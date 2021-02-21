@@ -1,4 +1,4 @@
-import java.util.*;  //<>//
+import java.util.*;  //<>// //<>//
 import processing.sound.*;
 import processing.video.*;
 SoundFile catSound1;
@@ -44,7 +44,6 @@ boolean colourDecreasing = false, comboSizeCounter2Decreasing = false;
 void setup() {
 
   catSound1 = new SoundFile(this, "../../data/cat_sound_final.wav");
-  backgroundSound.play();
   Layout();
   background(180);
 
