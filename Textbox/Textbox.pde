@@ -41,13 +41,8 @@ void setup() {
   catch (IOException c) {
     println("skjdfhksdj");
   }
-<<<<<<< HEAD
-  
-  
-=======
 
->>>>>>> d41874bfdcf79c3c5f05a08f40db96d57b26ea9d
-  wordToType = printWord();
+  wordToType = getNewWord();
   start = second() + (60 * (minute() + 60 * (hour() + 24 * (day()))));
 }
 
@@ -78,11 +73,6 @@ void mousePressed() {
 
 void keyPressed() {
 
-<<<<<<< HEAD
-  
-  
-=======
->>>>>>> d41874bfdcf79c3c5f05a08f40db96d57b26ea9d
   if (key == wordToType.toLowerCase().charAt(currentKeyIndex)) { //if the letter is correct
     currentKeyIndex++;
     for (TEXTBOX text : textboxes) {
@@ -98,15 +88,14 @@ void keyPressed() {
     TypedWords[numOfTypedWords] = wordToType;
     numOfTypedWords++;
     //new word
-    wordToType = printWord(); 
+    wordToType = getNewWord(); 
     currentKeyIndex = 0;
     message.Text = "";
     message.TextLength= 0;
     userWord = "";
-    
+
     //score go up?
-  } 
-   else { //key press is wrong or word is wrong
+  } else { //key press is wrong or word is wrong
     message.screenShakeAmountX = 50;
 
     // add some text effects to show it's wrong    
@@ -114,12 +103,22 @@ void keyPressed() {
   }
 }
 
-String printWord() {
+String getNewWord() {
   textSize(30);
   fill(0);
   if (count < 50)
   {
     String word = words[0][(int)random(20)];
+    Boolean newWord = false;
+    while (!newWord) {
+      word = words[0][(int)random(20)];
+      newWord = true;
+      for (int i = 0; i < numOfTypedWords; i++) { //makes sure to not give the person a word that's already been typed
+        if  (word.toLowerCase().equals(TypedWords[i].toLowerCase())) {
+          newWord = false;
+        }
+      }
+    }
     return word;
   } else if ( count > 50 & count < 100) {
     String word = words[1][(int)random(20)];
