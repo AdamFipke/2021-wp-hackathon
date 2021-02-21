@@ -18,7 +18,11 @@ PImage life5;
 int E2Y = 130;
 Boolean [] show = {true, true, true, true, true};
 int livesLost = -1;
+//combo stuff
 int cccombo = 0;
+int colourCounter = 0;
+int comboSizeCounter = 0;
+int tempCombo = 0;
 
 void setup() {
   Layout();
@@ -76,17 +80,20 @@ void draw() {
   
   
   //CCCC COMBO
-  int tempCombo = 0;
-  if (cccombo >= 10) {
+  if (cccombo >= 20) {
+    
+  } else if (cccombo >= 10) {
     message.TEXTSIZE = 24 + cccombo;
     tempCombo = cccombo;
   } else  {
     message.TEXTSIZE = 24 + tempCombo;
-    if (tempCombo > 0) {
+    if ((tempCombo > 0) && (comboSizeCounter > 2)) {
      tempCombo--; 
+     comboSizeCounter = 0;
     }
   }
-  fill(count*cccombo/3, count*cccombo/6, count*cccombo/9);
+  comboSizeCounter++;
+  fill(count*cccombo/5, count*cccombo/10, count*cccombo/15);
   text(wordToType, 400, 250);
   text("Combo: "+cccombo, 100-message.screenShakeAmountX, 100+message.screenShakeAmountY);
   fill(255);
