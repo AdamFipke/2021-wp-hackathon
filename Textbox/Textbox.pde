@@ -27,6 +27,7 @@ Cat c3;
 Cat c4;
 Cat c5;
 Cat c6;
+int extra = 2;
 
 int E2Y = 130;
 Boolean [] show = {true, true, true, true, true};
@@ -137,38 +138,66 @@ void draw() {
 
 
   //CATS
-  if (numOfTypedWords >= 10) {
+  if(numOfTypedWords >= 10) {
     c1.display();
     c1.move();
   }
   if (numOfTypedWords >= 20) {
     c2.display();
     c2.move();
-  }
+  //  if(extra == 2){
+  //  c1.speedIncrease();
+  //  extra++;
+   }
+  //}
   if (numOfTypedWords >= 30) {
-    c3.display();
+  c3.display();
     c3.move();
-  }
+  //  if(extra == 3){
+  //  c1.speedIncrease();
+  //  c2.speedIncrease();
+  //  extra++;
+    }
+  //}
   if (numOfTypedWords >= 40) {
-    c4.display();
-    c4.move();
-  }
+   c4.display();
+   c4.move();
+  //  if(extra == 4){
+  //  c1.speedIncrease();
+  //  c2.speedIncrease();
+  //  c3.speedIncrease();
+  //  extra++;
+    }
+  //}
   if (numOfTypedWords >= 50) {
     c5.display();
     c5.move();
+  //  if(extra == 5){
+  //  c1.speedIncrease();
+  //  c2.speedIncrease();
+  //  c3.speedIncrease();
+  //  c4.speedIncrease();
+  //  extra++;
+  //  }
   }
 
   if (numOfTypedWords >= 60) {
-    c6.display();
+   c6.display();
     c6.move();
+  //  if(extra == 6){
+  //  c1.speedIncrease();
+  //  c2.speedIncrease();
+  //  c3.speedIncrease();
+  //  c4.speedIncrease();
+  //  c5.speedIncrease();
+  //  extra++;
+   }
 
 
 
-    if (livesLost == 5) {
-      background(255, 0, 0);
-    }
+  
   }
-}
+
 
 void Layout() {
   message = new TEXTBOX((width - 200) / 2, 150, 200, 30);
@@ -205,6 +234,13 @@ void keyPressed() {
     message.Text = "";
     message.TextLength= 0;
     userWord = "";
+     c1.speedIncrease();
+    c2.speedIncrease();
+    c3.speedIncrease();
+    c4.speedIncrease();
+    c5.speedIncrease();
+    c6.speedIncrease();
+ 
   } else { //key press is wrong or word is wrong
     message.screenShakeAmountX = 50;
     livesLost++;

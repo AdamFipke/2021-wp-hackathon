@@ -22,14 +22,16 @@ public class Cat {
     if ((this.location.x >= width -100) || (this.location.x <= 0)) {
       this.velocity.x = this.velocity.x * -1;
     }
-    if (this.location.y >= height ) {
+    if (this.location.y >= height - 50) {
       this.velocity.y = this.velocity.y * -0.9; 
-      this.location.y = height;
+     
+     this.location.y = height - 50;
     }
   }
    void speedIncrease(){
-     this.velocity.x = this.velocity.x * 1.2;
-     this.velocity.y = this.velocity.y * 1.2;
+   this.velocity.x = this.velocity.x * 1.01;
+     this.velocity.y = this.velocity.y * 1.02;
    }
+   
   
 }
