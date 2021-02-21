@@ -4,13 +4,17 @@ import processing.video.*;
 SoundFile catSound1;
 ArrayList<TEXTBOX> textboxes = new ArrayList<TEXTBOX>();
 String userWord = ""; 
+int fade = 0;
 String wordToType = "";
 String [][] words = new String [3][];
 String [] TypedWords = new String[999];
 int numOfTypedWords = 0;
 int currentKeyIndex = 0;
 TEXTBOX message;
+boolean click = false;
+int win = 0; //1 for winning and 2 for losing, 0 for normal execution
 int count = 0;
+int wpm;
 double start, end;
 PImage life1;
 PImage life2;
@@ -79,9 +83,6 @@ void setup() {
     println("skjdfhksdj");
   }
 
-  wordToType = getNewWord();
-  start = second() + (60 * (minute() + 60 * (hour() + 24 * (day()))));
-
   //cats
   location = new PVector(100, 100);
   velocity = new PVector(3, 7);
@@ -103,7 +104,6 @@ void setup() {
 
   movie.loop();
   movie.volume(0.4); //music volume
- 
 }
 
 public void settings() {
@@ -114,89 +114,100 @@ void draw() {
 
 
   background(180);
-  
-  //movie transparency
-  int trnps = count/10;
-  if (trnps >180) {
-    trnps = 180;
-  }
-  tint(255, trnps);
+
+  if (win == 0) {
+    //movie transparency
+    int trnps = count/10;
+    if (trnps >180) {
+      trnps = 180;
+    }
+    tint(255, trnps);
     image(movie, 0, 0, width, height);
-  tint(255, 255);
-  livesDisplay();
+    tint(255, 255);
+    livesDisplay();
+
+    for (TEXTBOX text : textboxes) {
+      text.DRAW();
+    } 
 
 
-  for (TEXTBOX text : textboxes) {
-    text.DRAW();
-  } 
-
-
-  //CCCC COMBO
-  fill(count*cccombo/5, count*cccombo/10, count*cccombo/15);
-  if (cccombo >= 20) {
-    if (comboSizeCounter2 > 3) {
-      comboSizeCounter2Decreasing = true;
-    } else if (comboSizeCounter2 < -2) {
-      comboSizeCounter2Decreasing = false;
-    }
-    if (comboSizeCounter2Decreasing) {
-      comboSizeCounter2-=0.2;
+    //CCCC COMBO
+    fill(count*cccombo/5, count*cccombo/10, count*cccombo/15);
+    if (cccombo >= 20) {
+      if (comboSizeCounter2 > 3) {
+        comboSizeCounter2Decreasing = true;
+      } else if (comboSizeCounter2 < -2) {
+        comboSizeCounter2Decreasing = false;
+      }
+      if (comboSizeCounter2Decreasing) {
+        comboSizeCounter2-=0.2;
+      } else {
+        comboSizeCounter2+=0.2;
+      }
+      message.TEXTSIZE = (24 + cccombo + (int)comboSizeCounter2);
+      fill(getRainbow());
+    } else if (cccombo >= 10) {
+      message.TEXTSIZE = 24 + cccombo;
+      tempCombo = cccombo;
     } else {
-      comboSizeCounter2+=0.2;
+      message.TEXTSIZE = 24 + tempCombo;
+      if ((tempCombo > 0) && (comboSizeCounter > 2)) {
+        tempCombo--; 
+        comboSizeCounter = 0;
+      }
     }
-    message.TEXTSIZE = (24 + cccombo + (int)comboSizeCounter2);
-    fill(getRainbow());
-  } else if (cccombo >= 10) {
-    message.TEXTSIZE = 24 + cccombo;
-    tempCombo = cccombo;
-  } else {
-    message.TEXTSIZE = 24 + tempCombo;
-    if ((tempCombo > 0) && (comboSizeCounter > 2)) {
-      tempCombo--; 
-      comboSizeCounter = 0;
+
+    text("Combo: "+cccombo, 50-message.screenShakeAmountX, 100+message.screenShakeAmountY);
+    text(wordToType, 400, 250 + ((cccombo > 20) ? (cccombo-20)*2 : 0));
+    fill(255);
+
+    //CATS
+    if (numOfTypedWords >= 10) {
+      c1.display();
+      c1.move();
+    }
+    if (numOfTypedWords >= 20) {
+      c2.display();
+      c2.move();
+    }
+
+    if (numOfTypedWords >= 30) {
+      c3.display();
+      c3.move();
+    }
+
+    if (numOfTypedWords >= 40) {
+      c4.display();
+      c4.move();
+    }
+
+    if (numOfTypedWords >= 50) {
+      c5.display();
+      c5.move();
+    }
+
+    if (numOfTypedWords >= 60) {
+      c6.display();
+      c6.move();
+
+      //sound
     }
   }
-  comboSizeCounter++;
-  text("Combo: "+cccombo, 50-message.screenShakeAmountX, 100+message.screenShakeAmountY);
-  text(wordToType, 400, 250 + ((cccombo > 20) ? (cccombo-20)*2 : 0));
-  fill(255);
-
-
-
-
-  //CATS
-  if (numOfTypedWords >= 10) {
-    c1.display();
-    c1.move();
+  else if(win == 1) {
+    textSize(50);
+    fill(0);
+    text("Congratulations, you win!!", 400, 300);
+    textSize(30);
+    text(getNewWord(), 400, 500);
   }
-  if (numOfTypedWords >= 20) {
-    c2.display();
-    c2.move();
+  else {
+     textSize(30);
+     fill(0);
+     text("You have run out of lives", 400, 250);
+     textSize(50);
+     fill(240, 0, 0);
+     text("GAME OVER", 400, 400);
   }
-
-  if (numOfTypedWords >= 30) {
-    c3.display();
-    c3.move();
-  }
-
-  if (numOfTypedWords >= 40) {
-    c4.display();
-    c4.move();
-  }
-
-  if (numOfTypedWords >= 50) {
-    c5.display();
-    c5.move();
-  }
-
-  if (numOfTypedWords >= 60) {
-    c6.display();
-    c6.move();
-
-    //sound
-  }
-
-
 }
 
 
@@ -206,6 +217,11 @@ void Layout() {
 }
 
 void mousePressed() {
+  if(!click) {
+     wordToType = getNewWord();
+     start = second() + (60 * (minute() + 60 * (hour() + 24 * (day()))));
+  }
+  click = true;
   for (TEXTBOX text : textboxes) {
     text.PRESSED(mouseX, mouseY);
   }
@@ -224,7 +240,7 @@ void keyPressed() {
       currentKeyIndex--;
     }
     //WPM goes up?
-  } else if ((key == ENTER || key == RETURN) && (userWord.toLowerCase().equals(wordToType.toLowerCase())) || (key == DELETE)) { //see if the key press is enter and if the word is correct
+  } else if ((key == ENTER || key == RETURN) && (userWord.toLowerCase().equals(wordToType.toLowerCase())) && win == 0 || (key == DELETE)) { //see if the key press is enter and if the word is correct
     //stores the typed word
     TypedWords[numOfTypedWords] = wordToType;
     numOfTypedWords++;
@@ -248,6 +264,7 @@ void keyPressed() {
     catSound1.play();
     if (livesLost >= 5)
     {
+      win = 2;
     } else
       show[livesLost] = false;
 
@@ -302,10 +319,13 @@ String getNewWord() {
       }
     }
     return word;
-  } else if (count > 150) {
+  } else if (count > 450) {
     System.out.println("You win!!!");
     end = second() + (60 * (minute() + 60 * (hour() + 24 * (day()))));
     double time = end - start;
+    wpm = (int) ((((double) count / 5) / time) * 60);
+    win = 1;
+    return "Your words per minute is: " + wpm;
   }
   return "";
 }

@@ -1,6 +1,7 @@
 public class TEXTBOX {
   public int X = 0, Y = 0, H = 35, W = 200;
   public int TEXTSIZE = 24;
+ 
 
   // COLORS
   public color Background = color(140, 140, 140);
@@ -65,6 +66,7 @@ public class TEXTBOX {
 
     X = Xtemp;
     Y = Ytemp;
+
   }
 
   // IF THE KEYCODE IS ENTER RETURN 1
