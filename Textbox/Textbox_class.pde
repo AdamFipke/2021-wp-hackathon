@@ -87,8 +87,8 @@ public class TEXTBOX {
         boolean isKeyCapitalLetter = (KEY >= 'A' && KEY <= 'Z');
         boolean isKeySmallLetter = (KEY >= 'a' && KEY <= 'z');
         boolean isKeyNumber = (KEY >= '0' && KEY <= '9');
-
-        if (isKeyCapitalLetter || isKeySmallLetter || isKeyNumber) {
+        boolean isKeyDash = (KEY == '-');
+        if (isKeyCapitalLetter || isKeySmallLetter || isKeyNumber || isKeyDash) {
           addText(KEY);
         }
       }

@@ -3,7 +3,7 @@ ArrayList<TEXTBOX> textboxes = new ArrayList<TEXTBOX>();
 String userWord = ""; 
 String wordToType = "";
 String [][] words = new String [3][];
-String [] TypedWords = new String[60];
+String [] TypedWords = new String[999];
 int numOfTypedWords = 0;
 int currentKeyIndex = 0;
 TEXTBOX message;
@@ -18,7 +18,7 @@ PImage life5;
 int E2Y = 130;
 Boolean [] show = {true, true, true, true, true};
 int livesLost = -1;
-
+int cccombo = 0;
 
 void setup() {
   Layout();
@@ -72,9 +72,25 @@ void draw() {
 
   for (TEXTBOX text : textboxes) {
     text.DRAW();
+  } 
+  
+  
+  //CCCC COMBO
+  int tempCombo = 0;
+  if (cccombo >= 10) {
+    message.TEXTSIZE = 24 + cccombo;
+    tempCombo = cccombo;
+  } else  {
+    message.TEXTSIZE = 24 + tempCombo;
+    if (tempCombo > 0) {
+     tempCombo--; 
+    }
   }
-
+  fill(count*cccombo/3, count*cccombo/6, count*cccombo/9);
   text(wordToType, 400, 250);
+  text("Combo: "+cccombo, 100-message.screenShakeAmountX, 100+message.screenShakeAmountY);
+  fill(255);
+  //message.TEXTSIZE = 24;
 }
 
 void Layout() {
@@ -105,17 +121,17 @@ void keyPressed() {
     //stores the typed word
     TypedWords[numOfTypedWords] = wordToType;
     numOfTypedWords++;
+    cccombo++;
     //new word
     wordToType = getNewWord(); 
     currentKeyIndex = 0;
     message.Text = "";
     message.TextLength= 0;
     userWord = "";
-
-    //score go up?
   } else { //key press is wrong or word is wrong
     message.screenShakeAmountX = 50;
     livesLost++;
+    cccombo = 0;
     if (livesLost >= 5)
     {
     } else
