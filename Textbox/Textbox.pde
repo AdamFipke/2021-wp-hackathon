@@ -3,12 +3,14 @@ ArrayList<TEXTBOX> textboxes = new ArrayList<TEXTBOX>();
 String userWord = ""; 
 String wordToType = "";
 String [][] words = new String [3][20];
-
+int currentKeyIndex = 0;
+TEXTBOX message;
 int count = 0;
 
 void setup() {
   Layout();
   background(180);
+  //text file readers for words
   BufferedReader wordListEasy = createReader("../Word-Bank-Easy.txt");
 
   try {
@@ -41,6 +43,9 @@ void setup() {
   catch (IOException c) {
     println("skjdfhksdj");
   }
+
+
+  wordToType = printWord();
 }
 
 public void settings() {
@@ -53,12 +58,12 @@ void draw() {
   for (TEXTBOX text : textboxes) {
     text.DRAW();
   }
-  
+
   text(wordToType, 400, 250);
 }
 
 void Layout() {
-  TEXTBOX message = new TEXTBOX((width - 200) / 2, 150, 200, 30);
+  message = new TEXTBOX((width - 200) / 2, 150, 200, 30);
   textboxes.add(message);
 }
 
@@ -69,13 +74,34 @@ void mousePressed() {
 }
 
 void keyPressed() {
+
   for (TEXTBOX text : textboxes) {
     text.KEYPRESSED(key, keyCode);
   }
-  userWord = userWord + key;
-  if (key == ENTER || key == RETURN) {
-    wordToType = printWord();
+  if (key == wordToType.toLowerCase().charAt(currentKeyIndex)) { //if the letter is correct
+    currentKeyIndex++;
+    if (currentKeyIndex == wordToType.length()) {
+     currentKeyIndex--; 
+    }
+    //WPM goes up? //<>//
+  } else if ((key == ENTER || key == RETURN) && (userWord.toLowerCase().equals(wordToType.toLowerCase()))) { //see if the key press is enter and if the word is correct //<>//
+    wordToType = printWord(); //<>//
+    currentKeyIndex = 0; //<>//
+    message.Text = ""; //<>//
+    userWord = "";
+    //score go up
+  } else if (key == BACKSPACE || key == DELETE) {
+    currentKeyIndex--;
+    if (currentKeyIndex < 0) {
+      currentKeyIndex = 0;
+    }
+  } else { //key press is wrong or word is wrong
+    message.screenShakeAmountX = 55;
+
+    // add some text effects to show it's wrong    
+    //make text red?
   }
+  userWord = userWord + key;
 }
 
 String printWord() {

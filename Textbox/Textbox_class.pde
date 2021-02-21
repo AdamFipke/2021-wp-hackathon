@@ -17,8 +17,8 @@ public class TEXTBOX {
   private boolean selected = false;
 
   //screen shake stuff
-  int screenShakeAmountX = 0;
-  int screenShakeAmountY = 0;
+  public int screenShakeAmountX = 0;
+  public int screenShakeAmountY = 0;
   int screenCounter = 0; 
   int screenCounter2 = 0; 
 
