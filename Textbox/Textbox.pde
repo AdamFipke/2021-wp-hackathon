@@ -98,7 +98,7 @@ void setup() {
 
   //sound stuff
   catSound1 = new SoundFile(this, "../../data/cat_sound_final.wav");
-  catSound1.amp(0.15); 
+  catSound1.amp(0.1); 
   //movie stuff
   movie = new Movie(this, "../../data/keyboard-cat.mov");
   //  movie.width = width;
@@ -164,31 +164,31 @@ void draw() {
     fill(255);
 
     //CATS
-    if (numOfTypedWords >= 10) {
+    if (numOfTypedWords >= 5) {
       c1.display();
       c1.move();
     }
-    if (numOfTypedWords >= 20) {
+    if (numOfTypedWords >= 10) {
       c2.display();
       c2.move();
     }
 
-    if (numOfTypedWords >= 30) {
+    if (numOfTypedWords >= 15) {
       c3.display();
       c3.move();
     }
 
-    if (numOfTypedWords >= 40) {
+    if (numOfTypedWords >= 20) {
       c4.display();
       c4.move();
     }
 
-    if (numOfTypedWords >= 50) {
+    if (numOfTypedWords >= 25) {
       c5.display();
       c5.move();
     }
 
-    if (numOfTypedWords >= 60) {
+    if (numOfTypedWords >= 30) {
       c6.display();
       c6.move();
 
@@ -287,7 +287,7 @@ void keyPressed() {
 String getNewWord() {
   textSize(30);
   fill(0);
-  if (count < 150)
+  if (count < 100)
   {
     String word = words[0][(int)random(words[0].length)];
     Boolean newWord = false;
@@ -301,7 +301,7 @@ String getNewWord() {
       }
     }
     return word;
-  } else if ( count >= 150 & count < 250) {
+  } else if ( count >= 100 & count < 175) {
     String word = words[1][(int)random(words[1].length)];
     Boolean newWord = false;
     while (!newWord) {
@@ -314,7 +314,7 @@ String getNewWord() {
       }
     }
     return word;
-  } else if ( count >= 250 & count < 300) {
+  } else if ( count >= 175 & count < 225) {
     String word = words[2][(int)random(words[2].length)];
     Boolean newWord = false;
     while (!newWord) {
@@ -327,7 +327,7 @@ String getNewWord() {
       }
     }
     return word;
-  } else if (count >= 300) {
+  } else if (count >= 225) {
     end = second() + (60 * (minute() + 60 * (hour() + 24 * (day()))));
 
     double time = end - start;
