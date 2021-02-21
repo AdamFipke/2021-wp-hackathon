@@ -23,7 +23,7 @@ public class Cat {
   if ((this.location.x > width -100) || (this.location.x < 0)) {
     this.velocity.x = this.velocity.x * -1;
   }
-  if (this.location.y > height) {
+  if (this.location.y > height + 50) {
     this.velocity.y = this.velocity.y * -0.95; 
     this.location.y = height;
     
