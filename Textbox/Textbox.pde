@@ -105,52 +105,7 @@ void draw() {
   //CCCC COMBO
   fill(count*cccombo/5, count*cccombo/10, count*cccombo/15);
   if (cccombo >= 20) {
-    fill(cr, cg, cb);
-    //Red to yellow
-    if (cg < 255 && cb == 0)
-    {
-      cg = cg + 1;
-    }
-    //Yellow to green
-    if (cg == 255 && cb == 0) 
-    {
-      if (cr >= 0)
-      {
-        cr = cr - 1;
-      }
-    }
-    //Green to cyan
-    if (cr == 0 && cg == 255) 
-    {
-      if (cb < 255)
-      {
-        cb = cb + 1;
-      }
-    }
-    //cyan to blue
-    if (cb == 255 && cr == 0)
-    {
-      if (cg > 0)
-      {
-        cg = cg - 1;
-      }
-    }
-    //Purple to magenta
-    if (cb == 255 && cg == 0) 
-    {
-      if (cr < 255)
-      {
-        cr = cr + 1;
-      }
-    }
-    //magenta to red
-    if (cr == 255 && cg == 0)
-    {
-      if (cb > 0)
-      {
-        cb = cb - 1;
-      }
-    }
+    fill(getRainbow());
   } else if (cccombo >= 10) {
     message.TEXTSIZE = 24 + cccombo;
     tempCombo = cccombo;
@@ -173,7 +128,6 @@ void draw() {
   if (numOfTypedWords >= 10) {
     c1.display();
     c1.move();
-   
   }
   if (numOfTypedWords >= 20) {
     c2.display();
@@ -195,12 +149,11 @@ void draw() {
   if (numOfTypedWords >= 60) {
     c6.display();
     c6.move();
-    
-    
-    
-    if(livesLost == 5){
-      background(255,0,0);
-      
+
+
+
+    if (livesLost == 5) {
+      background(255, 0, 0);
     }
   }
 }
@@ -328,5 +281,53 @@ void livesDisplay() {
   life5 = loadImage("../../catpics/purple-cat.png");
   life5.resize(100, 100);
   if (show[4])image(life5, 450, 30);
-  
+}
+
+color getRainbow() {
+  //Red to yellow
+  if (cg < 255 && cb == 0)
+  {
+    cg = cg + 1;
+  }
+  //Yellow to green
+  if (cg == 255 && cb == 0) 
+  {
+    if (cr >= 0)
+    {
+      cr = cr - 1;
+    }
+  }
+  //Green to cyan
+  if (cr == 0 && cg == 255) 
+  {
+    if (cb < 255)
+    {
+      cb = cb + 1;
+    }
+  }
+  //cyan to blue
+  if (cb == 255 && cr == 0)
+  {
+    if (cg > 0)
+    {
+      cg = cg - 1;
+    }
+  }
+  //Purple to magenta
+  if (cb == 255 && cg == 0) 
+  {
+    if (cr < 255)
+    {
+      cr = cr + 1;
+    }
+  }
+  //magenta to red
+  if (cr == 255 && cg == 0)
+  {
+    if (cb > 0)
+    {
+      cb = cb - 1;
+    }
+  }
+  return color(cr, cg, cb);
 }
