@@ -7,68 +7,69 @@ PImage cat2;
 int p = 1;
 int i = 0;
 int score = 0;
+Cat c1;
+Cat c2;
+Cat c3;
+Cat c4;
+Cat c5;
+Cat c6;
 
 void setup() {
-  size(640, 360);
+  size(360,640);
   location = new PVector(100, 100);
   velocity = new PVector(3, 7);
   gravity = new PVector(0, 0.4);
-
-
-
-  cats[0] = loadImage("../../catpics/grey-cat.png");
-  cats[0].resize(100, 50);
-  cats[1] = loadImage("../../catpics/blue-cat.png");
-  cats[1].resize(100, 50);
-  cats[2] = loadImage("../../catpics/green-cat.png");
-  cats[2].resize(100, 50);
-  cats[3] = loadImage("../../catpics/purple-cat.png");
-  cats[3].resize(100, 50);
-  cats[4] = loadImage("../../catpics/yellow-cat.png");
-  cats[4].resize(100, 50);
-  cats[5] = loadImage("../../catpics/pop-cat.png");
-  cats[5].resize(100, 50);
+  c1 = new Cat(loadImage("../../catpics/grey-cat.png"));
+  c2 = new Cat(loadImage("../../catpics/blue-cat.png"));
+  c3 = new Cat(loadImage("../../catpics/green-cat.png"));
+  c4 = new Cat(loadImage("../../catpics/purple-cat.png"));
+  c5 = new Cat(loadImage("../../catpics/yellow-cat.png"));
+  c6 = new Cat(loadImage("../../catpics/pop-cat.png"));
 }
 
- class Ball {
-  
-  float x, y;
-  float diameter;
-  float vx = 0;
-  float vy = 0;
-  int id;
-  Ball[] others;
- 
-  Ball(float x, float y, float diameter, int id, Ball[] others) {
-    this.x = x;
-    this.y = y;
-    this.diameter = diameter;
-    this.id = id;
-    this.others = others;
-  } 
+
 
 
 void draw() {
   background(255);
+
+
+
+
+   if (score >= 3) {
+     c1.display();
+     c1.move();
+  }
+  if(score >= 6){
+    c2.display();
+    c2.move();
+  }
+  if(score >= 9){
+    c3.display();
+    c3.move();
+  }
+  if(score >= 12){
+    c4.display();
+    c4.move();
+  }
+  if(score >= 15){
+    c5.display();
+    c5.move();
+  }
+  
+  //if(game DONE)
+  //c6.display();
+  //c6.move();
   
 
- 
-    if(score >= 3){
-      image(cats[0], location.x, location.y-50);
-    }
-    if(score >= 6){
-      image(cats[1], location.x-100, location.y-50);
-      
-    }
- 
 
-  
+
   location.add(velocity);
   velocity.add(gravity);
 
-  // Bounce off edges
-  if ((location.x > width) || (location.x < 0)) {
-    velocity.x = velocity.x * -1;
+//   Bounce off edges
+ if ((location.x > width) || (location.x < 0)) {
+   velocity.x = velocity.x * -1;
   }
   if (location.y > height) {
     velocity.y = velocity.y * -0.95; 
@@ -82,4 +83,5 @@ void draw() {
   fill(127);
   ellipse(location.x, location.y, 48, 48);
   println(score);
+  score++;
 }
