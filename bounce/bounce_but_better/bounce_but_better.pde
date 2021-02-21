@@ -17,7 +17,7 @@ void setup() {
 
 
   cats[0] = loadImage("../../catpics/grey-cat.png");
-  cats[0].resize(125, 75);
+  cats[0].resize(100, 50);
   cats[1] = loadImage("../../catpics/blue-cat.png");
   cats[1].resize(100, 50);
   cats[2] = loadImage("../../catpics/green-cat.png");
@@ -30,22 +30,26 @@ void setup() {
   cats[5].resize(100, 50);
 }
 
-void draw() {
-  background(255);
  
+public Class Cat(){
+}
+
+void draw() { //<>//
+  background(255);
+  
 
   //  switch(score){
     // case 3: image(cats[0], location.x, location.y);
      //case 6: image(cats[1], location.x, location.y); break;
      //case 9: image(cats[2], location.x, location.y); break;
-      
+   
       
     //}
     if(score >= 3){
-      image(cats[0], location.x, location.y);
+      image(cats[0], location.x, location.y-50);
     }
     if(score >= 6){
-      image(cats[1], location.x, location.y-100);
+      image(cats[1], location.x-100, location.y-50);
       
     }
  
