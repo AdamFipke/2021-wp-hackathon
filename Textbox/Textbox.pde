@@ -1,9 +1,46 @@
+import java.util.*;
 ArrayList<TEXTBOX> textboxes = new ArrayList<TEXTBOX>();
-String word = ""; 
+String userWord = ""; 
+String wordToType = "";
+String [][] words = new String [3][20];
 
+int count = 0;
 
 void setup() {
   Layout();
+  background(180);
+  BufferedReader wordListEasy = createReader("../Word-Bank-Easy.txt");
+
+  try {
+    for (int a = 0; a < words[0].length; a++) {
+      words[0][a] = wordListEasy.readLine();
+    }
+  } 
+  catch (IOException a) {
+    println("skjdfhksdj");
+  } 
+
+  BufferedReader wordListMedium = createReader("../Word-Bank-Medium.txt");
+
+  try {
+    for (int a = 0; a < words[0].length; a++) {
+      words[1][a] = wordListMedium.readLine();
+    }
+  } 
+  catch (IOException b) {
+    println("skjdfhksdj");
+  }
+
+  BufferedReader wordListHard = createReader("../Word-Bank-Hard.txt");
+
+  try {
+    for (int a = 0; a < words[0].length; a++) {
+      words[2][a] = wordListHard.readLine();
+    }
+  } 
+  catch (IOException c) {
+    println("skjdfhksdj");
+  }
 }
 
 public void settings() {
@@ -16,6 +53,8 @@ void draw() {
   for (TEXTBOX text : textboxes) {
     text.DRAW();
   }
+  
+  text(wordToType, 400, 250);
 }
 
 void Layout() {
@@ -33,10 +72,27 @@ void keyPressed() {
   for (TEXTBOX text : textboxes) {
     text.KEYPRESSED(key, keyCode);
   }
-  //if the key == the corrisponding letter in the word
-  if (key==ENTER||key==RETURN) {
-    //conditional to check if the word is correct?
-    word = "";
-  } else
-    word = word + key;
+  userWord = userWord + key;
+  if (key == ENTER || key == RETURN) {
+    wordToType = printWord();
+  }
+}
+
+String printWord() {
+  textSize(30);
+  fill(0);
+  if (count < 50)
+  {
+    String word = words[0][(int)random(20)];
+    return word;
+  } else if ( count > 50 & count < 100) {
+    String word = words[1][(int)random(20)];
+    return word;
+  } else if ( count > 100 & count < 150) {
+    String word = words[2][(int)random(20)];
+    return word;
+  } else if (count > 150) {
+    System.out.println("You win!!!");
+  }
+  return "";
 }
