@@ -14,6 +14,22 @@ PImage life2;
 PImage life3;
 PImage life4;
 PImage life5;
+//cats
+PVector location; 
+PVector velocity;  
+PVector gravity;   
+PImage[] cats = new PImage[6];
+PImage cat1;
+PImage cat2;
+int p = 1;
+int i = 0;
+float score = 0;
+Cat c1;
+Cat c2;
+Cat c3;
+Cat c4;
+Cat c5;
+Cat c6;
 
 int E2Y = 130;
 Boolean [] show = {true, true, true, true, true};
@@ -58,6 +74,17 @@ void setup() {
 
   wordToType = getNewWord();
   start = second() + (60 * (minute() + 60 * (hour() + 24 * (day()))));
+
+//cats
+  location = new PVector(100, 100);
+  velocity = new PVector(3, 7);
+  gravity = new PVector(0, 0.4);
+  c1 = new Cat(loadImage("../../catpics/grey-cat.png"));
+  c2 = new Cat(loadImage("../../catpics/blue-cat.png"));
+  c3 = new Cat(loadImage("../../catpics/green-cat.png"));
+  c4 = new Cat(loadImage("../../catpics/purple-cat.png"));
+  c5 = new Cat(loadImage("../../catpics/yellow-cat.png"));
+  c6 = new Cat(loadImage("../../catpics/pop-cat.png"));
 }
 
 public void settings() {
@@ -73,17 +100,17 @@ void draw() {
   for (TEXTBOX text : textboxes) {
     text.DRAW();
   } 
-  
-  
+
+
   //CCCC COMBO
   int tempCombo = 0;
   if (cccombo >= 10) {
     message.TEXTSIZE = 24 + cccombo;
     tempCombo = cccombo;
-  } else  {
+  } else {
     message.TEXTSIZE = 24 + tempCombo;
     if (tempCombo > 0) {
-     tempCombo--; 
+      tempCombo--;
     }
   }
   fill(count*cccombo/3, count*cccombo/6, count*cccombo/9);
@@ -91,6 +118,38 @@ void draw() {
   text("Combo: "+cccombo, 100-message.screenShakeAmountX, 100+message.screenShakeAmountY);
   fill(255);
   //message.TEXTSIZE = 24;
+
+
+
+
+  //CATS
+   if (numOfTypedWords >= 10) {
+    c1.display();
+    c1.move();
+    score = score + 0.1;
+  }
+  if (numOfTypedWords >= 20) {
+    c2.display();
+    c2.move();
+  }
+  if (numOfTypedWords >= 30) {
+    c3.display();
+    c3.move();
+  }
+  if (numOfTypedWords >= 40) {
+    c4.display();
+    c4.move();
+  }
+  if (numOfTypedWords >= 50) {
+    c5.display();
+    c5.move();
+  }
+
+  if (numOfTypedWords >= 60) {
+    c6.display();
+    c6.move();
+  }
+
 }
 
 void Layout() {
