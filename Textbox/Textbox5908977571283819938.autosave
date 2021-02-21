@@ -1,4 +1,4 @@
-import java.util.*;  //<>// //<>// //<>//
+import java.util.*; 
 import processing.sound.*;
 import processing.video.*;
 SoundFile catSound1;
@@ -95,7 +95,7 @@ void setup() {
 
   //sound stuff
   catSound1 = new SoundFile(this, "../../data/cat_sound_final.wav");
-  catSound1.amp(0.15); 
+  catSound1.amp(0.5); 
   //movie stuff
   movie = new Movie(this, "../../data/keyboard-cat.mov");
   //  movie.width = width;
