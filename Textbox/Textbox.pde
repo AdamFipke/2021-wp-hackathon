@@ -1,3 +1,5 @@
+ //<>//
+import java.*;
 import java.util.*;  //<>// //<>// //<>//
 import processing.sound.*;
 import processing.video.*;
@@ -43,19 +45,19 @@ int livesLost = -1;
 int cccombo = 0, comboSizeCounter = 0, tempCombo = 0, cr = 255, cg = 0, cb = 0;
 double comboSizeCounter2 = 0;
 boolean colourDecreasing = false, comboSizeCounter2Decreasing = false;
- String s = "";
- int run = 0;
+String s = "";
+int run = 0;
 
 
 void setup() {
 
-  catSound1 = new SoundFile(this, "../../data/cat_sound_final.wav");
+  catSound1 = new SoundFile(this, "cat_sound_final.wav");
   Layout();
   background(180);
 
   //text file readers for words
   words[0] = new String[998];
-  BufferedReader wordListEasy = createReader("../Word-Bank-Easy.txt");
+  BufferedReader wordListEasy = createReader("Word-Bank-Easy.txt");
   try {
     for (int a = 0; a < words[0].length; a++) {
       words[0][a] = wordListEasy.readLine();
@@ -65,7 +67,7 @@ void setup() {
     println("skjdfhksdj");
   } 
   words[1] = new String[1470];
-  BufferedReader wordListMedium = createReader("../Word-Bank-Medium.txt");
+  BufferedReader wordListMedium = createReader("Word-Bank-Medium.txt");
   try {
     for (int a = 0; a < words[1].length; a++) {
       words[1][a] = wordListMedium.readLine();
@@ -75,7 +77,7 @@ void setup() {
     println("skjdfhksdj");
   }
   words[2] = new String[335];
-  BufferedReader wordListHard = createReader("../Word-Bank-Hard.txt");
+  BufferedReader wordListHard = createReader("Word-Bank-Hard.txt");
   try {
     for (int a = 0; a < words[2].length; a++) {
       words[2][a] = wordListHard.readLine();
@@ -89,18 +91,18 @@ void setup() {
   location = new PVector(100, 100);
   velocity = new PVector(3, 7);
   gravity = new PVector(0, 0.4);
-  c1 = new Cat(loadImage("../../catpics/grey-cat.png"));
-  c2 = new Cat(loadImage("../../catpics/blue-cat.png"));
-  c3 = new Cat(loadImage("../../catpics/green-cat.png"));
-  c4 = new Cat(loadImage("../../catpics/purple-cat.png"));
-  c5 = new Cat(loadImage("../../catpics/yellow-cat.png"));
-  c6 = new Cat(loadImage("../../catpics/pop-cat.png"));
+  c1 = new Cat(loadImage("grey-cat.png"));
+  c2 = new Cat(loadImage("blue-cat.png"));
+  c3 = new Cat(loadImage("green-cat.png"));
+  c4 = new Cat(loadImage("purple-cat.png"));
+  c5 = new Cat(loadImage("yellow-cat.png"));
+  c6 = new Cat(loadImage("pop-cat.png"));
 
   //sound stuff
-  catSound1 = new SoundFile(this, "../../data/cat_sound_final.wav");
+  catSound1 = new SoundFile(this, "cat_sound_final.wav");
   catSound1.amp(0.15); 
   //movie stuff
-  movie = new Movie(this, "../../data/keyboard-cat.mov");
+  movie = new Movie(this, "keyboard-cat.mov");
   //  movie.width = width;
   //  movie.height = height;
 
@@ -148,6 +150,7 @@ void draw() {
       }
       message.TEXTSIZE = (24 + cccombo + (int)comboSizeCounter2);
       fill(getRainbow());
+      tempCombo = cccombo;
     } else if (cccombo >= 10) {
       message.TEXTSIZE = 24 + cccombo;
       tempCombo = cccombo;
@@ -157,6 +160,7 @@ void draw() {
         tempCombo--; 
         comboSizeCounter = 0;
       }
+      comboSizeCounter++;
     }
 
     text("Combo: "+cccombo, 50-message.screenShakeAmountX, 100+message.screenShakeAmountY);
@@ -194,27 +198,25 @@ void draw() {
 
       //sound
     }
-  }
-  else if(win == 1) {
-    if(run == 0){
-    s = "";
-    s = getNewWord();
-    run = 1;
+  } else if (win == 1) {
+    if (run == 0) {
+      s = "";
+      s = getNewWord();
+      run = 1;
     }
-  
-   textSize(50);
+
+    textSize(50);
     fill(0);
     text("Congratulations, you win!!", 200, 300);
     textSize(30);
-     text(s, 200, 500);
-  }
-  else {
-     textSize(30);
-     fill(0);
-     text("You have run out of lives", 200, 250);
-     textSize(50);
-     fill(240, 0, 0);
-     text("GAME OVER", 200, 400);
+    text(s, 200, 500);
+  } else {
+    textSize(30);
+    fill(0);
+    text("You have run out of lives", 200, 250);
+    textSize(50);
+    fill(240, 0, 0);
+    text("GAME OVER", 200, 400);
   }
 }
 
@@ -225,9 +227,9 @@ void Layout() {
 }
 
 void mousePressed() {
-  if(!click) {
-     wordToType = getNewWord();
-     start = second() + (60 * (minute() + 60 * (hour() + 24 * (day()))));
+  if (!click) {
+    wordToType = getNewWord();
+    start = second() + (60 * (minute() + 60 * (hour() + 24 * (day()))));
   }
   click = true;
   for (TEXTBOX text : textboxes) {
@@ -339,23 +341,23 @@ String getNewWord() {
 }
 
 void livesDisplay() {
-  life1 = loadImage("../../catpics/purple-cat.png");
+  life1 = loadImage("purple-cat.png");
   life1.resize(100, 100);
   if (show[0]) image(life1, 850, 30);
 
-  life2 = loadImage("../../catpics/purple-cat.png");
+  life2 = loadImage("purple-cat.png");
   life2.resize(100, 100);
   if (show[1])image(life2, 750, 30);
 
-  life3 = loadImage("../../catpics/purple-cat.png");
+  life3 = loadImage("purple-cat.png");
   life3.resize(100, 100);
   if (show[2])image(life3, 650, 30);
 
-  life4 = loadImage("../../catpics/purple-cat.png");
+  life4 = loadImage("purple-cat.png");
   life4.resize(100, 100);
   if (show[3])image(life4, 550, 30);
 
-  life5 = loadImage("../../catpics/purple-cat.png");
+  life5 = loadImage("purple-cat.png");
   life5.resize(100, 100);
   if (show[4])image(life5, 450, 30);
 }
